@@ -14,7 +14,7 @@ import android.content.DialogInterface;
 import com.google.firebase.FirebaseApp;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
-//import com.pusher.pushnotifications.PushNotifications;
+import com.pusher.pushnotifications.PushNotifications;
 
 
 public class MainActivity extends AppCompatActivity {
@@ -66,6 +66,7 @@ public class MainActivity extends AppCompatActivity {
                 alertDialog.show();
                 super.onReceivedError(webView, errorCode, description, failingUrl);
             }
+
         });
         // Locate the button in activity_main.xml
         Button camera = (Button) findViewById(R.id.camera);
@@ -74,7 +75,8 @@ public class MainActivity extends AppCompatActivity {
         camera.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
+                PushNotifications.start(getApplicationContext(), "2d2522d4-b7d2-4b94-87f8-e6cb8817bd10");
+                PushNotifications.subscribe("hello");
                 //get the camera reference from firebase database
                 final DatabaseReference camera = database.getReference("camera");
 
