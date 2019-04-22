@@ -1,4 +1,4 @@
-package com.arezki.test;
+package com.arezki.finalapp;
 
 import org.junit.Test;
 

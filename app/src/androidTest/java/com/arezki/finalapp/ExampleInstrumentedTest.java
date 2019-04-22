@@ -1,4 +1,4 @@
-package com.arezki.test;
+package com.arezki.finalapp;
 
 import android.content.Context;
 import android.support.test.InstrumentationRegistry;
