@@ -26,7 +26,7 @@ public class MainActivity extends AppCompatActivity {
 
     FirebaseDatabase database = FirebaseDatabase.getInstance();
 
-    private WebView myWebview;
+    public WebView myWebview;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
