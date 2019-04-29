@@ -1,7 +1,10 @@
 package com.arezki.finalapp;
 
 import android.content.DialogInterface;
+import android.content.Intent;
+import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
+import android.net.Uri;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
@@ -11,6 +14,8 @@ import android.webkit.WebViewClient;
 import android.widget.Button;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
+import android.widget.Toast;
+
 import com.google.firebase.FirebaseApp;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
@@ -36,7 +41,7 @@ public class MainActivity extends AppCompatActivity {
         // set up javaScript
         webSettings.setJavaScriptEnabled(true);
         //set the webview to open the url that shows the camera feed
-        myWebview.loadUrl("http://192.168.137.113:8000/index.html");
+        myWebview.loadUrl("http://192.168.137.211:8000/index.html");
         //set up an instance of the webView client and error handling
 
         //http://www.vetbossel.in/android-webview-webpage-not-available/
@@ -68,7 +73,7 @@ public class MainActivity extends AppCompatActivity {
             }
 
         });
-        // Locate the button in activity_main.xml
+        // Locate the picture button in activity_main.xml
         Button camera = (Button) findViewById(R.id.camera);
 
         //click to take a picture
@@ -84,6 +89,31 @@ public class MainActivity extends AppCompatActivity {
                 camera.setValue("on");
             }
         });
+        // Locate the whatsapp button in activity_main.xml
+        Button whatsapp = (Button) findViewById(R.id.whatsapp);
+
+        whatsapp.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                // putting the pnone number here
+                String contact = "+353 83 327 6906";
+
+                //make a url for the whatsApp application
+                String url = "https://api.whatsapp.com/send?phone=" + contact;
+                try {
+                    //get the package manager instance
+                    PackageManager pm = getApplicationContext().getPackageManager();
+                    pm.getPackageInfo("com.whatsapp", PackageManager.GET_ACTIVITIES);
+                    Intent i = new Intent(Intent.ACTION_VIEW);
+                    i.setData(Uri.parse(url));
+                    startActivity(i);
+                } catch (PackageManager.NameNotFoundException e) {
+                    Toast.makeText(getApplicationContext(),"Whatsapp app not installed in your phone",Toast.LENGTH_SHORT).show();
+                    e.printStackTrace();
+                }
+            }
+        });
+
 
     }
     public class myWebClient extends WebViewClient {
